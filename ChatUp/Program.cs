@@ -5,10 +5,10 @@ namespace ChatUp
 {
     public class Program
     {
-        public List<Person> personList = new List<Person>();
-
-        public static void Main(string[] args)
+        private static void Main(string[] args)
         {
+            List<Person> personList = new List<Person>();
+
             bool done = false;
             while (!done)
             {
@@ -24,23 +24,82 @@ namespace ChatUp
                         Person newPerson = new Person();
                         newPerson.FirstName = f;
                         newPerson.LastName = l;
-                        
+                        personList.Add(newPerson);
+
                         //AddPerson();
                         break;
                     case "2":
-                        ShowPerson();
+                        Console.WriteLine("Vilken av dessa vill du visa? Välj förstabokstav");
+                        string s = Console.ReadLine();
+                        foreach (var item in personList)
+                        {
+                            if ((item.FirstName).Substring(0,1) == s)
+                            {
+                                Console.WriteLine(item.FirstName);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Fanns ingen med den begynnelsebokstaven.");
+                            }
+                        }
+                        //ShowPerson();
                         break;
                     case "3":
-                        UpdatePerson();
+                        Console.WriteLine("Vilken av dessa vill du ändra? Välj förstabokstav");
+                        string ss = Console.ReadLine();
+                        foreach (var item in personList)
+                        {
+                            if ((item.FirstName).Substring(0, 1) == ss)
+                            {
+                                Console.WriteLine("Vilken av egenskaperna vill du ändra?");
+                                // ...
+                            }
+                            else
+                            {
+                                Console.WriteLine("Fanns ingen med den begynnelsebokstaven.");
+                            }
+                        }
+
+                        //UpdatePerson();
                         break;
                     case "4":
-                        DeletePerson();
+                        Console.WriteLine("Vilken av dessa vill du ta bort? Välj förstabokstav");
+                        string sss = Console.ReadLine();
+                        foreach (var item in personList)
+                        {
+                            if ((item.FirstName).Substring(0, 1) == sss)
+                            {
+                                personList.Remove(item);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Fanns ingen med den begynnelsebokstaven.");
+                            }
+                        }
+                        //DeletePerson();
                         break;
                     case "5a":
-                        ListAllPersons();
+                        foreach (var item in personList)
+                        {
+                            Console.WriteLine(item.FirstName);
+                        }
+                        //ListAllPersons();
                         break;
                     case "5b":
-                        ListCertainPerson();
+                        Console.WriteLine("Vilken av dessa vill du ta visa? Välj förstabokstav");
+                        string ssss = Console.ReadLine();
+                        foreach (var item in personList)
+                        {
+                            if ((item.FirstName).Substring(0, 1) == ssss)
+                            {
+                                Console.WriteLine(item.FirstName,item.LastName,item.InstagramProfile,item.IsBlocked,item.Alias);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Fanns ingen med den begynnelsebokstaven.");
+                            }
+                        }
+                        //ListCertainPerson();
                         break;
                     default:
                         Console.WriteLine("Ogitligt val. Försök igen!");
@@ -54,14 +113,14 @@ namespace ChatUp
             throw new NotImplementedException();
         }
 
-        public static ContactList ListAllPersons(ContactList c)
-        {
-            foreach (var item in personList) // Hittar inte personList
-            {
-                Console.WriteLine(item.FirstName);
-            }
-            return c;
-        }
+        //public static ContactList ListAllPersons(ContactList c)
+        //{
+        //    foreach (var item in personList) // Hittar inte personList
+        //    {
+        //        Console.WriteLine(item.FirstName);
+        //    }
+        //    return c;
+        //}
 
         private static Person DeletePerson()
         {
