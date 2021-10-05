@@ -20,5 +20,11 @@ namespace ChatUp
 
         public bool IsBlocked { get; set; } // bool is false by default
         public bool IsGhosted { get; set; }
+
+        public Person(string firstName, string lastName) // Metod som körs vid varje instantiering av Person.
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+        }
     }
 }

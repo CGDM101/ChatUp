@@ -22,9 +22,9 @@ namespace ChatUp
                         string f = Console.ReadLine();
                         Console.Write("Skriv in personens efternamn: ");
                         string l = Console.ReadLine();
-                        Person newPerson = new Person();
-                        newPerson.FirstName = f;
-                        newPerson.LastName = l;
+                        Person newPerson = new Person(f, l); // Konstruktorn körs
+                        //newPerson.FirstName = f;
+                        //newPerson.LastName = l;
                         personList.Add(newPerson);
                         Console.WriteLine(newPerson.FirstName + " tillagd");
                         //foreach (var item in personList)
