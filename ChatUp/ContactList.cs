@@ -13,10 +13,10 @@ namespace ChatUp
         // Constructor/-s
         // Method/-s
 
-        public static Person CreatePerson() { }
-        public static Person ReadPerson() { }
-        public static Person UpdatePerson() { }
-        public static Person DeletePerson() { }
-        public static Person ListPerson() { }
+        //public static Person CreatePerson() { }
+        //public static Person ReadPerson() { }
+        //public static Person UpdatePerson() { }
+        //public static Person DeletePerson() { }
+        //public static Person ListPerson() { }
     }
 }
