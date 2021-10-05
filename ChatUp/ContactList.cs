@@ -11,6 +11,14 @@ namespace ChatUp
         // Properties
         public Person Person { get; set; }
         // Constructor/-s
+        public ContactList() // default
+        {
+
+        }
+        public ContactList(string firstnamne, string lastnamne) // parameterised
+        {
+
+        }
         // Method/-s
 
         //public static Person CreatePerson() { }
