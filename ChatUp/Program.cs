@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace ChatUp
 {
-    class Program
+    public class Program
     {
-        List<Person> personList = new List<Person>();
+        public List<Person> personList = new List<Person>();
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             bool done = false;
             while (!done)
@@ -17,7 +17,15 @@ namespace ChatUp
                 switch (userInput)
                 {
                     case "1":
-                        AddPerson();
+                        Console.Write("Skriv in personens förnamn: ");
+                        string f = Console.ReadLine();
+                        Console.Write("Skriv in personens efternamn: ");
+                        string l = Console.ReadLine();
+                        Person newPerson = new Person();
+                        newPerson.FirstName = f;
+                        newPerson.LastName = l;
+                        
+                        //AddPerson();
                         break;
                     case "2":
                         ShowPerson();
@@ -46,9 +54,13 @@ namespace ChatUp
             throw new NotImplementedException();
         }
 
-        private static Person ListAllPersons() // should return list?
+        public static ContactList ListAllPersons(ContactList c)
         {
-            throw new NotImplementedException();
+            foreach (var item in personList) // Hittar inte personList
+            {
+                Console.WriteLine(item.FirstName);
+            }
+            return c;
         }
 
         private static Person DeletePerson()
@@ -66,22 +78,9 @@ namespace ChatUp
             throw new NotImplementedException();
         }
 
-        private static Person AddPerson(Person p)
+        private static void AddPerson()
         {
-            Console.Write("Skriv in personens förnamn: ");
-            string f = Console.ReadLine();
-            Console.Write("Skriv in personens efternamn: ");
-            string l = Console.ReadLine();
-            p.FirstName = f;
-            p.LastName = l;
-
-            List<Person> otherList = new List<Person>();
-            otherList.Add(p);
-            foreach (var item in otherList)
-            {
-                Console.WriteLine(p.FirstName);
-            }
-            return p; ;
+            throw new NotImplementedException();
         }
     }
 }
