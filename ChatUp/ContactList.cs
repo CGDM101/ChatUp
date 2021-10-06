@@ -6,11 +6,26 @@ namespace ChatUp
 {
     public class ContactList
     {
-        // MEMBERS:
-        // Field/-s
-        // Properties
-        public Person Person { get; set; }
-        // Constructor/-s
+        public List<Person> MyContacts = new List<Person>(); // field
+        // public List<Person> MyPersons { get; set; } = new List<Person>(); prop
+        public void AddPersonToMyContactList(Person personToAdd) // ickestatic
+        {
+            this.MyContacts.Add(personToAdd);
+        }
+
+        public void DeletePersonFromMyContactList(Person personToDelete)
+        {
+            this.MyContacts.Remove(personToDelete);
+        }
+
+
+
+
+
+
+        public List<Person> PersonList { get; set; }
+
+
         public ContactList() // default
         {
 
@@ -19,12 +34,8 @@ namespace ChatUp
         {
 
         }
-        // Method/-s
 
-        //public static Person CreatePerson() { }
-        //public static Person ReadPerson() { }
-        //public static Person UpdatePerson() { }
-        //public static Person DeletePerson() { }
-        //public static Person ListPerson() { }
+        // Namnregistret ska ha en metod kallad Menu() där en meny visas upp och användaren får välja vad denne vill göra
+        public static void Menu() { }
     }
 }

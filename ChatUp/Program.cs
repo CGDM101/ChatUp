@@ -7,7 +7,21 @@ namespace ChatUp
     {
         private static void Main(string[] args)
         {
-            List<Person> personList = new List<Person>();
+            ContactList minaKontakter = new ContactList(); // kontaktlistobjekt!!
+
+            Person minKontakt = new Person();
+            minKontakt.FirstName = "Nisse";
+            minKontakt.LastName = "Karlsson";
+            minKontakt.Alias = "nk";
+
+            minaKontakter.AddPersonToMyContactList(minKontakt);
+
+            
+            
+            List<Person> personList = new List<Person>(); // lista!!
+
+
+
 
             bool done = false;
             while (!done)
@@ -17,39 +31,32 @@ namespace ChatUp
                 string userInput = Console.ReadLine().ToLower().Trim();
                 switch (userInput)
                 {
-                    case "1":
+                    case "1": // LÄGGA TILL
                         Console.Write("Skriv in personens förnamn: "); 
                         string f = Console.ReadLine();
                         Console.Write("Skriv in personens efternamn: ");
                         string l = Console.ReadLine();
-                        Person newPerson = new Person(f, l); // Konstruktorn körs
+                        Console.Write("Skriv in personens alias: ");
+                        string a = Console.ReadLine();
+                        Person newPerson = new Person(f, l, a); // Konstruktorn körs
                         //newPerson.FirstName = f;
                         //newPerson.LastName = l;
-                        personList.Add(newPerson);
-                        Console.WriteLine(newPerson.FirstName + " tillagd");
-                        //foreach (var item in personList)
-                        //{
-                        //    Console.WriteLine(item.FirstName);
-                        //}
+                        minaKontakter.AddPersonToMyContactList(newPerson);
+                        //personList.Add(newPerson);
+                        Console.WriteLine(newPerson.Alias + " tillagd");
                         //AddPerson();
                         break;
-                    case "2":
+
+                    case "2": // VISA ALLT OM PERSON
                         Console.WriteLine("Vilken av dessa vill du visa all information om? Välj förstabokstav");
                         string s = Console.ReadLine();
                         foreach (var item in personList)
                         {
                             if ((item.FirstName).Substring(0,1) == s)
                             {
-                                Console.WriteLine(item.FirstName); // ska komma från ctor
+                                Console.WriteLine(item.FirstName);
                                 Console.WriteLine(item.LastName);
-                                Console.WriteLine(item.Alias); // null
-                                Console.WriteLine(item.EmailAddress);
-                                Console.WriteLine(item.FacebookProfile);
-                                Console.WriteLine(item.InstagramProfile);
-                                Console.WriteLine(item.IsBlocked); 
-                                Console.WriteLine(item.IsGhosted);
-                                Console.WriteLine(item.LinkedinProfile);
-                                Console.WriteLine(item.TwitterProfile);
+                                Console.WriteLine(item.Alias);
                             }
                             else
                             {
@@ -58,7 +65,8 @@ namespace ChatUp
                         }
                         //ShowPerson();
                         break;
-                    case "3": // Ändra person
+
+                    case "3": // ÄNDRA PERSON
                         Console.WriteLine("Vilken av dessa vill du ändra? Välj förstabokstav");
                         string ss = Console.ReadLine();
                         foreach (var item in personList)
@@ -82,39 +90,34 @@ namespace ChatUp
                                 Console.WriteLine("Fanns ingen med den begynnelsebokstaven.");
                             }
                         }
-
                         //UpdatePerson();
                         break;
-                    case "4":
-                        Console.WriteLine("Vilken av dessa vill du ta bort? Välj förstabokstav");
-                        string sss = Console.ReadLine();
-                        foreach (var item in personList) // Invalid Operation Exception
-                        {
-                            if ((item.FirstName).Substring(0, 1) == sss)
-                            {
-                                //personList.Remove(item);
-                                Console.WriteLine(item.FirstName + " kommer att tas bort");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Fanns ingen med den begynnelsebokstaven.");
-                            }
-                            personList.Remove(item);
-                        }
 
+                    case "4": // TA BORT PERSON
+                        Console.WriteLine("Vilken av dessa vill du ta bort? Välj förstabokstav på alias");
+                        string sss = Console.ReadLine();
+
+                        foreach (var item in minaKontakter.MyContacts)
+                        {
+                            if (item.Alias.Substring(0,1) == sss)
+                            {
+                                minaKontakter.DeletePersonFromMyContactList(item);
+                                Console.WriteLine(item.Alias+" kommer att tas bort.");
+                            }
+                            Console.WriteLine("Fanns ingen med den begynnelsebokstaven."); // FIXA: Skrivs alltid ut
+                        }
                         //DeletePerson();
                         break;
-                    case "5a":
-                        //Person a = new Person() { FirstName = "Adam" };
-                        //Person b = new Person() { FirstName = "Bertil" }; Person c = new Person() { FirstName = "Caesar" }; Person d = new Person() { FirstName = "David" }; Person e = new Person() { FirstName = "Erik" };
-                        //personList.Add(a); personList.Add(b); personList.Add(c); personList.Add(d); personList.Add(e);
+
+                    case "5a": // LISTA ALLA PERSONER
                         foreach (var item in personList)
                         {
-                            Console.WriteLine(item.FirstName);
+                            Console.WriteLine("* " + item.FirstName); // Skriver ut förnamnet bara (alias?)
                         }
                         //ListAllPersons();
                         break;
-                    case "5b":
+
+                    case "5b": // LISTA PERSONER PÅ VISS BOKSTAV
                         Console.WriteLine("Lista alla på viss bokstav - Välj förstabokstav");
                         string ssss = Console.ReadLine();
                         foreach (var item in personList)
@@ -128,55 +131,25 @@ namespace ChatUp
                                     Console.WriteLine(itemm.FirstName);
                                 }
                             }
-                            else
-                            {
-                                Console.WriteLine("Fanns ingen med den begynnelsebokstaven.");
-                            }
+                            // TODO Skrivs ut för alla inlagda personer som ej har rätt bokstav:
+                            //else if (item.FirstName.Substring(0, 1) != ssss)
+                            //{
+                            //    Console.WriteLine("Fanns ingen med den begynnelsebokstaven.");
+                            //}
+                            // Annars fungerar det
                         }
                         //ListCertainPerson();
                         break;
+
                     case "q":
                         done = true;
                         break;
+
                     default:
                         Console.WriteLine("Ogitligt val. Försök igen!");
                         break;
                 }
             }          
-        }
-
-        private static Person ListCertainPerson()
-        {
-            throw new NotImplementedException();
-        }
-
-        //public static ContactList ListAllPersons(ContactList c)
-        //{
-        //    foreach (var item in personList) // Hittar inte personList
-        //    {
-        //        Console.WriteLine(item.FirstName);
-        //    }
-        //    return c;
-        //}
-
-        private static Person DeletePerson()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static Person UpdatePerson()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static Person ShowPerson()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void AddPerson()
-        {
-            throw new NotImplementedException();
         }
     }
 }
