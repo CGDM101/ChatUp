@@ -5,7 +5,7 @@ namespace ChatUp
 {
     public class Program
     {
-        private static void Main(string[] args)
+        public static void Main(string[] args)
         {
             ContactList minaKontakter = new ContactList(); // kontaktlistobjekt!!
 
@@ -16,11 +16,9 @@ namespace ChatUp
 
             minaKontakter.AddPersonToMyContactList(minKontakt);
 
+            //PersonHelper.AskForPerson(minKontakt); // Print person etc
             
-            
-            List<Person> personList = new List<Person>(); // lista!!
-
-
+            //List<Person> personList = new List<Person>(); // lista!!
 
 
             bool done = false;
@@ -31,13 +29,13 @@ namespace ChatUp
                 string userInput = Console.ReadLine().ToLower().Trim();
                 switch (userInput)
                 {
-                    case "1": // LÄGGA TILL
+                    case "1": // LÄGGA TILL - FUNKAR
                         Console.Write("Skriv in personens förnamn: "); 
-                        string f = Console.ReadLine();
+                        string f = Console.ReadLine().Trim();
                         Console.Write("Skriv in personens efternamn: ");
-                        string l = Console.ReadLine();
+                        string l = Console.ReadLine().Trim();
                         Console.Write("Skriv in personens alias: ");
-                        string a = Console.ReadLine();
+                        string a = Console.ReadLine().Trim();
                         Person newPerson = new Person(f, l, a); // Konstruktorn körs
                         //newPerson.FirstName = f;
                         //newPerson.LastName = l;
@@ -47,12 +45,15 @@ namespace ChatUp
                         //AddPerson();
                         break;
 
-                    case "2": // VISA ALLT OM PERSON
-                        Console.WriteLine("Vilken av dessa vill du visa all information om? Välj förstabokstav");
-                        string s = Console.ReadLine();
-                        foreach (var item in personList)
+                    case "2": // VISA ALLT OM PERSON - FUNKAR
+                        Console.WriteLine("Vilken av dessa vill du visa all information om? Välj förstabokstav i alias!");
+                        string s = Console.ReadLine().ToLower().Trim();
+
+                            //minaKontakter.ShowPerson() // Hjälpmetod/-klass?
+
+                        foreach (var item in minaKontakter.MyContacts)
                         {
-                            if ((item.FirstName).Substring(0,1) == s)
+                            if ((item.Alias).Substring(0, 1) == s)
                             {
                                 Console.WriteLine(item.FirstName);
                                 Console.WriteLine(item.LastName);
@@ -66,43 +67,72 @@ namespace ChatUp
                         //ShowPerson();
                         break;
 
-                    case "3": // ÄNDRA PERSON
-                        Console.WriteLine("Vilken av dessa vill du ändra? Välj förstabokstav");
-                        string ss = Console.ReadLine();
-                        foreach (var item in personList)
+                    case "3": // ÄNDRA PERSON -Funkar förutom vid else
+                        Console.WriteLine("Vilken av dessa vill du ändra? Välj förstabokstav på alias!");
+                        string ss = Console.ReadLine().ToLower().Trim();
+                        foreach (var item in minaKontakter.MyContacts)
                         {
-                            if ((item.FirstName).Substring(0, 1) == ss)
+                            if ((item.Alias).Substring(0, 1) == ss)
                             {
                                 Console.WriteLine("Vilken av egenskaperna vill du ändra?");
                                 Console.WriteLine("[F]örnamn");
                                 Console.WriteLine("[E]fternamn");
                                 Console.WriteLine("[A]lias");
-                                Console.WriteLine("[E]mejl-adress");
-                                Console.WriteLine("[F]acebookprofil");
-                                Console.WriteLine("[I]nstagramprofil");
-                                Console.WriteLine("[B]lockerad");
-                                Console.WriteLine("[G]hostad");
-                                Console.WriteLine("[L]inkedInProfil");
-                                Console.WriteLine("[T]witterprofil");
+                                //Console.WriteLine("[E]mejl-adress");
+                                //Console.WriteLine("[F]acebookprofil");
+                                //Console.WriteLine("[I]nstagramprofil");
+                                //Console.WriteLine("[B]lockerad");
+                                //Console.WriteLine("[G]hostad");
+                                //Console.WriteLine("[L]inkedInProfil");
+                                //Console.WriteLine("[T]witterprofil");
+                                string input = Console.ReadLine().Trim().ToLower();
+                                switch (input)
+                                {
+                                    case "f":
+                                        Console.WriteLine("Du valde " + input);
+                                        Console.Write("Skriv in nytt förnamn: ");
+                                        f = Console.ReadLine().Trim();
+                                        item.FirstName = f;
+                                        Console.WriteLine("Du har uppdaterat " + item.Alias + " med förnamnet: " + f + ". Personens fullständiga information är nu: " + item.Alias + " " + item.FirstName + " " + item.LastName);
+                                        break;
+                                    case "e":
+                                        Console.WriteLine("Du valde " + input);
+                                        Console.Write("Skriv in nytt efternamn: ");
+                                        l = Console.ReadLine().Trim();
+                                        item.LastName = l;
+                                        Console.WriteLine("Du har uppdaterat " + item.Alias + " med efternamn: " + l + ". Personens fullständiga information är nu: " + item.Alias + " " + item.FirstName + " " + item.LastName);
+                                        break;
+                                    case "a":
+                                        Console.WriteLine("Du valde " + input);
+                                        Console.Write("Skriv in nytt alias: ");
+                                        a = Console.ReadLine().Trim();
+                                        item.Alias = a;
+                                        Console.WriteLine("Du har uppdaterat " + item.Alias + " med aliaset: " + a + ". Personens fullständiga information är nu: " + item.Alias + " " + item.FirstName + " " + item.LastName);
+                                        break;
+
+                                    default:
+                                        Console.WriteLine("Ogitligt val - försök igen!");
+                                        break;
+                                }
                             }
-                            else
+                            else // lägga till if?
                             {
-                                Console.WriteLine("Fanns ingen med den begynnelsebokstaven.");
+                                Console.WriteLine("Fanns ingen med den begynnelsebokstaven."); // Funkar delvis - ej efter ändring
                             }
                         }
                         //UpdatePerson();
                         break;
 
-                    case "4": // TA BORT PERSON
+                    case "4": // TA BORT PERSON - funkar inte på exc
                         Console.WriteLine("Vilken av dessa vill du ta bort? Välj förstabokstav på alias");
-                        string sss = Console.ReadLine();
+                        string sss = Console.ReadLine().ToLower().Trim();
 
-                        foreach (var item in minaKontakter.MyContacts)
+                        foreach (var item in minaKontakter.MyContacts) // Invalid operation exception
                         {
-                            if (item.Alias.Substring(0,1) == sss)
+                            if (item.Alias.Substring(0, 1) == sss)
                             {
                                 minaKontakter.DeletePersonFromMyContactList(item);
-                                Console.WriteLine(item.Alias+" kommer att tas bort.");
+                                Console.WriteLine(item.Alias + " kommer att tas bort.");
                             }
                             Console.WriteLine("Fanns ingen med den begynnelsebokstaven."); // FIXA: Skrivs alltid ut
                         }
@@ -110,17 +140,17 @@ namespace ChatUp
                         break;
 
                     case "5a": // LISTA ALLA PERSONER
-                        foreach (var item in personList)
+                        foreach (var item in minaKontakter.MyContacts)
                         {
-                            Console.WriteLine("* " + item.FirstName); // Skriver ut förnamnet bara (alias?)
+                            Console.WriteLine("* " + item.Alias);
                         }
                         //ListAllPersons();
                         break;
 
-                    case "5b": // LISTA PERSONER PÅ VISS BOKSTAV
+                    case "5b": // LISTA PERSONER PÅ VISS BOKSTAV - FUNKAR förutom else
                         Console.WriteLine("Lista alla på viss bokstav - Välj förstabokstav");
-                        string ssss = Console.ReadLine();
-                        foreach (var item in personList)
+                        string ssss = Console.ReadLine().ToLower().Trim();
+                        foreach (var item in minaKontakter.MyContacts)
                         {
                             if ((item.FirstName).Substring(0, 1) == ssss)
                             {
@@ -128,7 +158,7 @@ namespace ChatUp
                                 specialList.Add(item);
                                 foreach (var itemm in specialList)
                                 {
-                                    Console.WriteLine(itemm.FirstName);
+                                    Console.WriteLine($"Förnamn: {itemm.FirstName}, Efternamn: {itemm.LastName}, Alias: {itemm.Alias}");
                                 }
                             }
                             // TODO Skrivs ut för alla inlagda personer som ej har rätt bokstav:

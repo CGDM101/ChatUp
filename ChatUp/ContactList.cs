@@ -13,17 +13,34 @@ namespace ChatUp
             this.MyContacts.Add(personToAdd);
         }
 
+
+        public void ShowPersonFromMyContactList(Person personToShow)
+        {
+            
+        }
+
+        public void ChangePersonFromMyContactList(Person personToChange)
+        {
+
+        }
+
         public void DeletePersonFromMyContactList(Person personToDelete)
         {
             this.MyContacts.Remove(personToDelete);
         }
 
+        public void ShowAllPersonsFromMyContactList(Person personsToShow)
+        {
+
+        }
+
+        public void ShowPersonsWithCertainLetter(Person personsWithCertainLetter)
+        {
+
+        }
 
 
-
-
-
-        public List<Person> PersonList { get; set; }
+        //public List<Person> PersonList { get; set; }
 
 
         public ContactList() // default
