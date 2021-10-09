@@ -13,6 +13,12 @@ namespace ChatUp
             ContactList minaKontakter = new ContactList(); // kontaktlistobjekt - ej lista!
 
 
+            Person testPerson = PersonHelper.AskForPerson(minaKontakter);
+            Console.WriteLine(testPerson.Alias);
+
+
+
+
             Menu(minaKontakter); // Använder minaKontakter som argument när metoden körs
 
 
@@ -25,7 +31,7 @@ namespace ChatUp
 
             minaKontakter.AddPersonToMyContactList(minKontakt);
 
-            //PersonHelper.AskForPerson(minKontakt); // Print person etc
+
         }
 
         private static void Menu(ContactList minaKontakter) // hämtar in minaKontakter som parameter
@@ -143,7 +149,7 @@ namespace ChatUp
                             {
                                 removedPerson = item;
                                 //minaKontakter.MyContacts.Remove(item);
-                                //minaKontakter.DeletePersonFromMyContactList(item); // om använder metod istället
+                                //minaKontakter.DeletePersonFromMyContactList(item); // om använder metod istället (onödigt eftersom det finns en Remove() inbyggt
                                 Console.WriteLine(item.Alias + " kommer att tas bort.");
                             }
                             else if(item.Alias.Substring(0, 1) == sss)

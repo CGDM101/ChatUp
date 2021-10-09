@@ -14,7 +14,7 @@ namespace ChatUp
             this.MyContacts.Add(personToAdd);
         }
 
-        //public void DeletePersonFromMyContactList(Person personToDelete) // fuybkar inte
+        //public void DeletePersonFromMyContactList(Person personToDelete)
         //{
         //    this.MyContacts.Remove(personToDelete);
         //}
