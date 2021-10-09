@@ -52,7 +52,5 @@ namespace ChatUp
 
         }
 
-        // Namnregistret ska ha en metod kallad Menu() där en meny visas upp och användaren får välja vad denne vill göra
-        public static void Menu() { }
     }
 }

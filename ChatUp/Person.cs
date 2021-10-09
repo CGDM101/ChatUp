@@ -9,7 +9,7 @@ namespace ChatUp
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Alias { get; set; }
-        public bool IsBlocked { get; set; } // bool is false by default
+        public bool IsBlocked { get; set; }
 
         public Person(string firstName, string lastName, string alias) // Metod som körs vid varje instantiering av Person.
         {
