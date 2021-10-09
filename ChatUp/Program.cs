@@ -132,19 +132,25 @@ namespace ChatUp
                         //UpdatePerson();
                         break;
 
-                    case "4": // TA BORT PERSON - funkar inte pga exc
+                    case "4": // TA BORT PERSON - funkar
                         Console.WriteLine("Vilken av dessa vill du ta bort? Välj förstabokstav på alias");
                         string sss = Console.ReadLine().ToLower().Trim();
 
-                        foreach (var item in minaKontakter.MyContacts) // Invalid operation exception
+                        Person removedPerson = new Person();
+                        foreach (var item in minaKontakter.MyContacts)
                         {
                             if (item.Alias.Substring(0, 1) == sss)
                             {
-                                minaKontakter.DeletePersonFromMyContactList(item);
+                                removedPerson = item;
+                                //minaKontakter.MyContacts.Remove(item);
+                                //minaKontakter.DeletePersonFromMyContactList(item); // om använder metod istället
                                 Console.WriteLine(item.Alias + " kommer att tas bort.");
                             }
-                            Console.WriteLine("Fanns ingen med den begynnelsebokstaven."); // FIXA: Skrivs alltid ut
+                            else if(item.Alias.Substring(0, 1) == sss)
+                            Console.WriteLine("Fanns ingen med den begynnelsebokstaven.");
                         }
+                        minaKontakter.MyContacts.Remove(removedPerson); // måste ha här pga exception annars
+
                         //DeletePerson();
                         break;
 

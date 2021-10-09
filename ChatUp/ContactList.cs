@@ -14,10 +14,10 @@ namespace ChatUp
             this.MyContacts.Add(personToAdd);
         }
 
-        public void DeletePersonFromMyContactList(Person personToDelete) // fuybkar inte
-        {
-            this.MyContacts.Remove(personToDelete);
-        }
+        //public void DeletePersonFromMyContactList(Person personToDelete) // fuybkar inte
+        //{
+        //    this.MyContacts.Remove(personToDelete);
+        //}
 
         public void ShowPersonFromMyContactList(Person personToShow) // Verkar funka
         {
@@ -28,6 +28,7 @@ namespace ChatUp
 
         public void ChangePersonFromMyContactList()
         {
+            
         }
 
 
