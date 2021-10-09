@@ -50,7 +50,6 @@ namespace ChatUp
                         //newPerson.LastName = l;
                         
                         minaKontakter.AddPersonToMyContactList(newPerson);
-                        //personList.Add(newPerson);
                         Console.WriteLine(newPerson.Alias + " tillagd");
                         //AddPerson();
                         break;
@@ -59,25 +58,25 @@ namespace ChatUp
                         Console.WriteLine("Vilken av dessa vill du visa all information om? Välj förstabokstav i alias!");
                         string s = Console.ReadLine().ToLower().Trim();
 
-                        //minaKontakter.ShowPerson() // Hjälpmetod/-klass?
-
                         foreach (var item in minaKontakter.MyContacts)
                         {
                             if ((item.Alias).Substring(0, 1) == s)
                             {
-                                Console.WriteLine(item.FirstName);
-                                Console.WriteLine(item.LastName);
-                                Console.WriteLine(item.Alias);
+                                //Console.WriteLine(item.FirstName);
+                                //Console.WriteLine(item.LastName);
+                                //Console.WriteLine(item.Alias);
+                                minaKontakter.ShowPersonFromMyContactList(item); // kallar på metoden
                             }
                             else
                             {
                                 Console.WriteLine("Fanns ingen med den begynnelsebokstaven.");
                             }
                         }
-                        //ShowPerson();
                         break;
 
                     case "3": // ÄNDRA PERSON -Funkar förutom vid else
+
+
                         Console.WriteLine("Vilken av dessa vill du ändra? Välj förstabokstav på alias!");
                         string ss = Console.ReadLine().ToLower().Trim();
                         foreach (var item in minaKontakter.MyContacts)
@@ -133,7 +132,7 @@ namespace ChatUp
                         //UpdatePerson();
                         break;
 
-                    case "4": // TA BORT PERSON - funkar inte på exc
+                    case "4": // TA BORT PERSON - funkar inte pga exc
                         Console.WriteLine("Vilken av dessa vill du ta bort? Välj förstabokstav på alias");
                         string sss = Console.ReadLine().ToLower().Trim();
 
@@ -149,12 +148,14 @@ namespace ChatUp
                         //DeletePerson();
                         break;
 
-                    case "5a": // LISTA ALLA PERSONER
-                        foreach (var item in minaKontakter.MyContacts)
-                        {
-                            Console.WriteLine("* " + item.Alias);
-                        }
+                    case "5a": // LISTA ALLA PERSONER - varkar ufnka
+                        //foreach (var item in minaKontakter.MyContacts)
+                        //{
+                        //    Console.WriteLine("* " + item.Alias);
+                        //}
                         //ListAllPersons();
+                        minaKontakter.ShowAllPersonsFromMyContactList(minaKontakter);
+
                         break;
 
                     case "5b": // LISTA PERSONER PÅ VISS BOKSTAV - FUNKAR förutom else
