@@ -6,20 +6,15 @@ namespace ChatUp
 {
     public class ContactList
     {
-        public List<Person> MyContacts = new List<Person>(); // field
+        public List<Person> myContacts = new List<Person>(); // field
        // public List<Person> MyPersons { get; set; } = new List<Person>(); prop
 
-        public void AddPersonToMyContactList(Person personToAdd) // ickestatic. FUNKAR
+        public void AddPersonToMyContactList(Person personToAdd)
         {
-            this.MyContacts.Add(personToAdd);
+            this.myContacts.Add(personToAdd);
         }
 
-        //public void DeletePersonFromMyContactList(Person personToDelete)
-        //{
-        //    this.MyContacts.Remove(personToDelete);
-        //}
-
-        public void ShowPersonFromMyContactList(Person personToShow) // Verkar funka
+        public void ShowPersonFromMyContactList(Person personToShow)
         {
             Console.WriteLine(personToShow.FirstName);
             Console.WriteLine(personToShow.LastName);
@@ -32,9 +27,10 @@ namespace ChatUp
         }
 
 
-        public void ShowAllPersonsFromMyContactList(ContactList all) // verkar funka
+        public void ShowAllPersonsFromMyContactList(ContactList all)
         {
-            foreach (var item in all.MyContacts)
+            Console.WriteLine("Här är en lista på alla alias:");
+            foreach (var item in all.myContacts)
             {
                 Console.WriteLine(item.Alias);
             }
@@ -49,10 +45,14 @@ namespace ChatUp
         {
 
         }
-        public ContactList(string firstnamne, string lastnamne) // parameterised
-        {
-
-        }
+        //public ContactList(string alias, string firstnamne, string lastnamne) // parameterised
+        //{
+        //    Person a = new Person() { Alias = "a", FirstName = "aaa", LastName = "ööö" };
+        //    Person b = new Person() { Alias = "b", FirstName = "bbb", LastName = "äää" };
+        //    Person c = new Person() { Alias = "c", FirstName = "ccc", LastName = "ååå" };
+        //    List<Person> testList = new List<Person>();
+        //    testList.Add(a);testList.Add(b);testList.Add(c);
+        //}
 
     }
 }

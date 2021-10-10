@@ -8,12 +8,12 @@ namespace ChatUp
     {
         public static Person AskForPerson(ContactList c)
         {
-            Console.WriteLine("Vilken av dessa vill du visa all information om? Välj förstabokstav i alias!");
+            Console.WriteLine("Vilken vill du välja? Välj förstabokstav i alias!");
             string s = Console.ReadLine();
 
             Person personChosen = new Person();
 
-            foreach (var item in c.MyContacts)
+            foreach (var item in c.myContacts)
             {
                 if (item.Alias == s)
                 {

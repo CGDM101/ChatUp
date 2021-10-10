@@ -5,33 +5,38 @@ namespace ChatUp
 {
     public class Program
     {
-        // Hela namnregistret ska ha en egen klass (ex Contacts), den ska enbart instansieras från main()
-        // Namnregistret ska ha en metod kallad Menu() där en meny visas upp och användaren får välja vad denne vill göra
-
         public static void Main(string[] args)
         {
             ContactList minaKontakter = new ContactList(); // kontaktlistobjekt - ej lista!
 
 
-            Person testPerson = PersonHelper.AskForPerson(minaKontakter);
-            Console.WriteLine(testPerson.Alias);
+
+            // Test fråga efter perosn:
+            Person personReturnedFromHelperClass = PersonHelper.AskForPerson(minaKontakter);
+            Console.WriteLine(personReturnedFromHelperClass.Alias); // Funkar inte - null returned
+
+
+
+
+            // Testlista med tre personer vid start av programmet:
+            Person a = new Person();
+            a.FirstName = "aaa";
+            a.LastName = "ööö";
+            a.Alias = "aö";
+            Person b = new Person();
+            b.FirstName = "bbb";
+            b.LastName = "äää";
+            b.Alias = "bä";
+            Person c = new Person();
+            c.FirstName = "ccc";
+            c.LastName = "ååå";
+            c.Alias = "cå";
+            minaKontakter.AddPersonToMyContactList(a); minaKontakter.AddPersonToMyContactList(b); minaKontakter.AddPersonToMyContactList(c);
 
 
 
 
             Menu(minaKontakter); // Använder minaKontakter som argument när metoden körs
-
-
-
-
-            Person minKontakt = new Person();
-            minKontakt.FirstName = "Nisse";
-            minKontakt.LastName = "Karlsson";
-            minKontakt.Alias = "nk";
-
-            minaKontakter.AddPersonToMyContactList(minKontakt);
-
-
         }
 
         private static void Menu(ContactList minaKontakter) // hämtar in minaKontakter som parameter
@@ -44,7 +49,7 @@ namespace ChatUp
                 string userInput = Console.ReadLine().ToLower().Trim();
                 switch (userInput)
                 {
-                    case "1": // LÄGGA TILL - FUNKAR
+                    case "1": // LÄGGA TILL
                         Console.Write("Skriv in personens förnamn: ");
                         string f = Console.ReadLine().Trim();
                         Console.Write("Skriv in personens efternamn: ");
@@ -52,40 +57,29 @@ namespace ChatUp
                         Console.Write("Skriv in personens alias: ");
                         string a = Console.ReadLine().Trim();
                         Person newPerson = new Person(f, l, a); // Konstruktorn körs
-                        //newPerson.FirstName = f;
-                        //newPerson.LastName = l;
-                        
+                       
                         minaKontakter.AddPersonToMyContactList(newPerson);
                         Console.WriteLine(newPerson.Alias + " tillagd");
-                        //AddPerson();
                         break;
 
-                    case "2": // VISA ALLT OM PERSON - FUNKAR
+                    case "2": // VISA ALLT OM PERSON
                         Console.WriteLine("Vilken av dessa vill du visa all information om? Välj förstabokstav i alias!");
                         string s = Console.ReadLine().ToLower().Trim();
 
-                        foreach (var item in minaKontakter.MyContacts)
+                        foreach (var item in minaKontakter.myContacts)
                         {
                             if ((item.Alias).Substring(0, 1) == s)
                             {
-                                //Console.WriteLine(item.FirstName);
-                                //Console.WriteLine(item.LastName);
-                                //Console.WriteLine(item.Alias);
                                 minaKontakter.ShowPersonFromMyContactList(item); // kallar på metoden
                             }
-                            else
-                            {
-                                Console.WriteLine("Fanns ingen med den begynnelsebokstaven.");
-                            }
                         }
+                        NoSuchPerson();
                         break;
 
-                    case "3": // ÄNDRA PERSON -Funkar förutom vid else
-
-
+                    case "3": // ÄNDRA PERSON
                         Console.WriteLine("Vilken av dessa vill du ändra? Välj förstabokstav på alias!");
                         string ss = Console.ReadLine().ToLower().Trim();
-                        foreach (var item in minaKontakter.MyContacts)
+                        foreach (var item in minaKontakter.myContacts)
                         {
                             if ((item.Alias).Substring(0, 1) == ss)
                             {
@@ -130,50 +124,35 @@ namespace ChatUp
                                         break;
                                 }
                             }
-                            else // lägga till if?
-                            {
-                                Console.WriteLine("Fanns ingen med den begynnelsebokstaven."); // Funkar delvis - ej efter ändring
-                            }
                         }
-                        //UpdatePerson();
+                        NoSuchPerson();
                         break;
 
-                    case "4": // TA BORT PERSON - funkar
+                    case "4": // TA BORT PERSON
                         Console.WriteLine("Vilken av dessa vill du ta bort? Välj förstabokstav på alias");
                         string sss = Console.ReadLine().ToLower().Trim();
 
                         Person removedPerson = new Person();
-                        foreach (var item in minaKontakter.MyContacts)
+                        foreach (var item in minaKontakter.myContacts)
                         {
                             if (item.Alias.Substring(0, 1) == sss)
                             {
                                 removedPerson = item;
-                                //minaKontakter.MyContacts.Remove(item);
-                                //minaKontakter.DeletePersonFromMyContactList(item); // om använder metod istället (onödigt eftersom det finns en Remove() inbyggt
                                 Console.WriteLine(item.Alias + " kommer att tas bort.");
                             }
-                            else if(item.Alias.Substring(0, 1) == sss)
-                            Console.WriteLine("Fanns ingen med den begynnelsebokstaven.");
                         }
-                        minaKontakter.MyContacts.Remove(removedPerson); // måste ha här pga exception annars
-
-                        //DeletePerson();
+                        minaKontakter.myContacts.Remove(removedPerson);
+                        NoSuchPerson();
                         break;
 
-                    case "5a": // LISTA ALLA PERSONER - varkar ufnka
-                        //foreach (var item in minaKontakter.MyContacts)
-                        //{
-                        //    Console.WriteLine("* " + item.Alias);
-                        //}
-                        //ListAllPersons();
+                    case "5a": // LISTA ALLA PERSONER (bara alias)
                         minaKontakter.ShowAllPersonsFromMyContactList(minaKontakter);
-
                         break;
 
-                    case "5b": // LISTA PERSONER PÅ VISS BOKSTAV - FUNKAR förutom else
+                    case "5b": // LISTA PERSONER PÅ VISS BOKSTAV
                         Console.WriteLine("Lista alla på viss bokstav - Välj förstabokstav");
                         string ssss = Console.ReadLine().ToLower().Trim();
-                        foreach (var item in minaKontakter.MyContacts)
+                        foreach (var item in minaKontakter.myContacts)
                         {
                             if ((item.FirstName).Substring(0, 1) == ssss)
                             {
@@ -184,14 +163,8 @@ namespace ChatUp
                                     Console.WriteLine($"Förnamn: {itemm.FirstName}, Efternamn: {itemm.LastName}, Alias: {itemm.Alias}");
                                 }
                             }
-                            // TODO Skrivs ut för alla inlagda personer som ej har rätt bokstav:
-                            //else if (item.FirstName.Substring(0, 1) != ssss)
-                            //{
-                            //    Console.WriteLine("Fanns ingen med den begynnelsebokstaven.");
-                            //}
-                            // Annars fungerar det
                         }
-                        //ListCertainPerson();
+                        NoSuchPerson();
                         break;
 
                     case "q":
@@ -204,5 +177,36 @@ namespace ChatUp
                 }
             }
         }
+
+        public static void NoSuchPerson()
+        {
+            Console.WriteLine("Det finns ingen med den begynnelsebokstaven!");
+        }
+
+
+
+
+        //public static void SelectPerson()
+        //{
+
+        //}
+
+        //public static Person AskForPerson(ContactList c)
+        //{
+        //    Console.WriteLine("Vilken vill du välja? Välj förstabokstav i alias!");
+        //    string s = Console.ReadLine();
+
+        //    Person personChosen = new Person();
+
+        //    foreach (var item in c.myContacts)
+        //    {
+        //        if (item.Alias == s)
+        //        {
+        //            personChosen = item;
+        //        }
+        //    }
+        //    return personChosen;
+        //}
+
     }
 }
