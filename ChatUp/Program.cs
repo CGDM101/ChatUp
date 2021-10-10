@@ -7,15 +7,7 @@ namespace ChatUp
     {
         public static void Main(string[] args)
         {
-            ContactList minaKontakter = new ContactList(); // kontaktlistobjekt - ej lista!
-
-
-
-            // Test fråga efter perosn:
-            Person personReturnedFromHelperClass = PersonHelper.AskForPerson(minaKontakter);
-            Console.WriteLine(personReturnedFromHelperClass.Alias); // Funkar inte - null returned
-
-
+            ContactList minaKontakter = new ContactList();
 
 
             // Testlista med tre personer vid start av programmet:
@@ -31,8 +23,14 @@ namespace ChatUp
             c.FirstName = "ccc";
             c.LastName = "ååå";
             c.Alias = "cå";
-            minaKontakter.AddPersonToMyContactList(a); minaKontakter.AddPersonToMyContactList(b); minaKontakter.AddPersonToMyContactList(c);
+            Person cOther = new Person(); // annan person på 'c' för att kunna testa att det går att skriva ut flera på viss bokstav
+            cOther.FirstName = "cOtherFirst";
+            cOther.LastName = "cOtherLast";
+            cOther.Alias = "cOtherAlias";
+            minaKontakter.AddPersonToMyContactList(a); minaKontakter.AddPersonToMyContactList(b); minaKontakter.AddPersonToMyContactList(c);minaKontakter.AddPersonToMyContactList(cOther);
 
+            //Person personReturnedFromHelperClass = PersonHelper.AskForPerson(minaKontakter);
+            //Console.WriteLine(personReturnedFromHelperClass.Alias + " returned");
 
 
 
@@ -70,7 +68,7 @@ namespace ChatUp
                         {
                             if ((item.Alias).Substring(0, 1) == s)
                             {
-                                minaKontakter.ShowPersonFromMyContactList(item); // kallar på metoden
+                                minaKontakter.ShowPersonFromMyContactList(item);
                             }
                         }
                         NoSuchPerson();
@@ -150,21 +148,7 @@ namespace ChatUp
                         break;
 
                     case "5b": // LISTA PERSONER PÅ VISS BOKSTAV
-                        Console.WriteLine("Lista alla på viss bokstav - Välj förstabokstav");
-                        string ssss = Console.ReadLine().ToLower().Trim();
-                        foreach (var item in minaKontakter.myContacts)
-                        {
-                            if ((item.FirstName).Substring(0, 1) == ssss)
-                            {
-                                List<Person> specialList = new List<Person>();
-                                specialList.Add(item);
-                                foreach (var itemm in specialList)
-                                {
-                                    Console.WriteLine($"Förnamn: {itemm.FirstName}, Efternamn: {itemm.LastName}, Alias: {itemm.Alias}");
-                                }
-                            }
-                        }
-                        NoSuchPerson();
+                        minaKontakter.ShowPersonsWithCertainLetter(minaKontakter);
                         break;
 
                     case "q":

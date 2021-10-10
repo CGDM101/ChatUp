@@ -16,16 +16,10 @@ namespace ChatUp
 
         public void ShowPersonFromMyContactList(Person personToShow)
         {
-            Console.WriteLine(personToShow.FirstName);
-            Console.WriteLine(personToShow.LastName);
-            Console.WriteLine(personToShow.Alias);
+            Console.WriteLine($"Förnamn: {personToShow.FirstName}");
+            Console.WriteLine($"Efternamn: {personToShow.LastName}");
+            Console.WriteLine($"Alias: {personToShow.Alias}");
         }
-
-        public void ChangePersonFromMyContactList()
-        {
-            
-        }
-
 
         public void ShowAllPersonsFromMyContactList(ContactList all)
         {
@@ -36,23 +30,34 @@ namespace ChatUp
             }
         }
 
-        public void ShowPersonsWithCertainLetter(Person personsWithCertainLetter)
-        {
 
+        public void ChangePersonFromMyContactList(Person personToBeChanged)
+        {
         }
+
+        public void ShowPersonsWithCertainLetter(ContactList c)
+        {
+            Console.WriteLine("Lista alla på viss bokstav - Välj förstabokstav på alias!");
+            string ans = Console.ReadLine().ToLower().Trim();
+            foreach (var item in c.myContacts)
+            {
+                if ((item.Alias).Substring(0, 1) == ans)
+                {
+                    List<Person> certainList = new List<Person>();
+                    certainList.Add(item);
+                    foreach (var item2 in certainList)
+                    {
+                        Console.WriteLine($"Förnamn: {item2.FirstName}, Efternamn: {item2.LastName}, Alias: {item2.Alias}");
+                    }
+                }
+            }
+            Program.NoSuchPerson();
+        }
+
 
         public ContactList() // default
         {
 
         }
-        //public ContactList(string alias, string firstnamne, string lastnamne) // parameterised
-        //{
-        //    Person a = new Person() { Alias = "a", FirstName = "aaa", LastName = "ööö" };
-        //    Person b = new Person() { Alias = "b", FirstName = "bbb", LastName = "äää" };
-        //    Person c = new Person() { Alias = "c", FirstName = "ccc", LastName = "ååå" };
-        //    List<Person> testList = new List<Person>();
-        //    testList.Add(a);testList.Add(b);testList.Add(c);
-        //}
-
     }
 }
