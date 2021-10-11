@@ -29,8 +29,9 @@ namespace ChatUp
             cOther.Alias = "cOtherAlias";
             minaKontakter.AddPersonToMyContactList(a); minaKontakter.AddPersonToMyContactList(b); minaKontakter.AddPersonToMyContactList(c);minaKontakter.AddPersonToMyContactList(cOther);
 
-            //Person personReturnedFromHelperClass = PersonHelper.AskForPerson(minaKontakter);
-            //Console.WriteLine(personReturnedFromHelperClass.Alias + " returned");
+
+            Person personReturnedFromHelperClass = PersonHelper.AskForPerson(minaKontakter);
+            Console.WriteLine(personReturnedFromHelperClass.Alias + " returned");
 
 
 

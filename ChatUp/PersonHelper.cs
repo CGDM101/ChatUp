@@ -15,7 +15,8 @@ namespace ChatUp
 
             foreach (var item in c.myContacts)
             {
-                if (item.Alias == s)
+                // item.Alias == s // måste skriva in hela aliaset
+                if (item.Alias.StartsWith(s)) // Substring kraschar om ""
                 {
                     personChosen = item;
                 }
